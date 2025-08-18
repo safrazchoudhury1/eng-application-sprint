@@ -8,6 +8,7 @@ Usage:
     # then type two lines (strings) as input.
 """
 
+
 def lcs_length(a: str, b: str) -> int:
     """Compute the length of the longest common subsequence between two strings."""
     n, m = len(a), len(b)
@@ -18,8 +19,11 @@ def lcs_length(a: str, b: str) -> int:
             if a[i] == b[j]:
                 dp[i + 1][j + 1] = dp[i][j] + 1
             else:
-                dp[i + 1][j + 1] = dp[i][j + 1] if dp[i][j + 1] >= dp[i + 1][j] else dp[i + 1][j]
+                dp[i + 1][j + 1] = (
+                    dp[i][j + 1] if dp[i][j + 1] >= dp[i + 1][j] else dp[i + 1][j]
+                )
     return dp[n][m]
+
 
 if __name__ == "__main__":
     try:

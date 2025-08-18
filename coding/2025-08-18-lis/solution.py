@@ -3,6 +3,7 @@ Compute the length of the longest increasing subsequence (LIS) in a list of inte
 This implementation uses a binary search approach (patience sorting) and runs in O(n log n) time.
 """
 
+
 def length_of_lis(nums):
     """Return the length of the longest increasing subsequence in nums."""
     tails = []
@@ -20,6 +21,7 @@ def length_of_lis(nums):
         else:
             tails[left] = num
     return len(tails)
+
 
 if __name__ == "__main__":
     try:

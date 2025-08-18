@@ -1,18 +1,20 @@
-import tkinter as tk
-from tkinter import filedialog, messagebox
-import threading
-import time
-import random
 import datetime
 import pathlib
+import random
+import threading
+import time
+import tkinter as tk
+from tkinter import filedialog, messagebox
 
 # Log file path relative to this script
 LOG_FILE = pathlib.Path(__file__).parent / "upload_log_gui.txt"
+
 
 def log(msg: str) -> None:
     ts = datetime.datetime.now().isoformat(timespec="seconds")
     with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(f"[{ts}] {msg}\n")
+
 
 def attempt_upload(job_path: str) -> bool:
     """
@@ -21,7 +23,10 @@ def attempt_upload(job_path: str) -> bool:
     """
     return random.random() > 0.5
 
-def upload_with_retries(job_path: str, max_retries: int = 5, base_delay: float = 0.5) -> bool:
+
+def upload_with_retries(
+    job_path: str, max_retries: int = 5, base_delay: float = 0.5
+) -> bool:
     """
     Attempt to upload a job, retrying with exponential backoff if it fails.
     Each attempt is logged. Returns True if upload eventually succeeds.
@@ -36,11 +41,13 @@ def upload_with_retries(job_path: str, max_retries: int = 5, base_delay: float =
         delay *= 2
     return False
 
+
 class UploaderGUI:
     """
     Simple Tkinter GUI for managing and uploading jobs with retries.
     Allows the user to add file paths as jobs and start uploads.
     """
+
     def __init__(self, root: tk.Tk) -> None:
         self.root = root
         self.root.title("Unstable Internet Uploader")
@@ -67,7 +74,9 @@ class UploaderGUI:
         add_btn = tk.Button(btn_frame, text="Add Job", command=self.add_job)
         add_btn.pack(side=tk.LEFT, padx=5)
 
-        start_btn = tk.Button(btn_frame, text="Start Uploads", command=self.start_uploads)
+        start_btn = tk.Button(
+            btn_frame, text="Start Uploads", command=self.start_uploads
+        )
         start_btn.pack(side=tk.LEFT, padx=5)
 
         # Output text area to show results
@@ -99,9 +108,13 @@ class UploaderGUI:
         success = upload_with_retries(job_path)
         result = "Success" if success else "Failed"
         log(f"{job_path}: {result}")
-        # Update text widget in the main thread
+        self.root.after(0, self._append_result, job_path, result)
+
+    def _append_result(self, job_path: str, result: str) -> None:
+        """Append job result to the output widget in the main thread."""
         self.output.insert(tk.END, f"{job_path}: {result}\n")
         self.output.see(tk.END)
+
 
 if __name__ == "__main__":
     root = tk.Tk()

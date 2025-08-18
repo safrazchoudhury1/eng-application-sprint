@@ -1,5 +1,9 @@
+from collections import deque
+
+
 class TreeNode:
     """Binary tree node for traversal algorithms."""
+
     def __init__(self, val, left=None, right=None):
         self.val = val
         self.left = left
@@ -26,8 +30,6 @@ def postorder(root):
         return []
     return postorder(root.left) + postorder(root.right) + [root.val]
 
-
-from collections import deque
 
 def level_order(root):
     """Return a list of values from a breadth‑first (level order) traversal."""

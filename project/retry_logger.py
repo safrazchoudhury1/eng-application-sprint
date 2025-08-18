@@ -19,7 +19,9 @@ def write_log(message: str) -> None:
         f.write(f"[{timestamp}] {message}\n")
 
 
-def upload_with_retries(job_id: int, max_retries: int = 5, base_delay: float = 0.5) -> bool:
+def upload_with_retries(
+    job_id: int, max_retries: int = 5, base_delay: float = 0.5
+) -> bool:
     """Attempt to upload with retries and exponential backoff."""
     delay = base_delay
     for attempt in range(1, max_retries + 1):
@@ -32,9 +34,11 @@ def upload_with_retries(job_id: int, max_retries: int = 5, base_delay: float = 0
     return False
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     random.seed(42)  # deterministic for demo
     job_id = 1
     success = upload_with_retries(job_id)
     write_log(f"job {job_id}: {'COMPLETED' if success else 'GAVE UP'}")
-    print(f"Finished with {'success' if success else 'failure'}. See upload_log.txt for details.")
+    print(
+        f"Finished with {'success' if success else 'failure'}. See upload_log.txt for details."
+    )

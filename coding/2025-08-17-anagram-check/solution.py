@@ -1,5 +1,6 @@
 # Determine if two strings are anagrams ignoring case and non-alphanumeric chars.
 
+
 def clean(s: str) -> str:
     return "".join(ch.lower() for ch in s if ch.isalnum())
 

@@ -16,7 +16,7 @@ def dijkstra(n, edges, start):
     adj = [[] for _ in range(n)]
     for u, v, w in edges:
         adj[u].append((v, w))
-    dist = [float('inf')] * n
+    dist = [float("inf")] * n
     dist[start] = 0.0
     heap = [(0.0, start)]
     while heap:
@@ -72,7 +72,7 @@ def main():
         return
     dist = dijkstra(n, edges, start)
     for i, d in enumerate(dist):
-        if d == float('inf'):
+        if d == float("inf"):
             print(f"{i}: INF")
         else:
             print(f"{i}: {d}")

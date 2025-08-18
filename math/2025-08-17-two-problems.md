@@ -8,11 +8,24 @@ Given \(a + b = 12\) and \(ab = 35\).
 **(b)** Compute \(a^3 + b^3\).
 
 **Solution:**
-We have \(a^2 + b^2 = (a + b)^2 - 2ab = 144 - 70 = 74\).
-Also \(a^3 + b^3 = (a + b)^3 - 3ab(a + b) = 1728 - 1260 = 468\).
+\[
+\begin{aligned}
+a^2 + b^2 &= (a + b)^2 - 2ab = 12^2 - 2\cdot 35 = 74, \\
+a^3 + b^3 &= (a + b)^3 - 3ab(a + b) = 12^3 - 3\cdot 35\cdot 12 = 468.
+\end{aligned}
+\]
+
+**Why this works:** These identities rewrite power sums in terms of \(a+b\) and \(ab\),
+values we already know, avoiding solving for \(a\) and \(b\) individually.
 
 ## Problem 2 – Number Theory
 Find the remainder when \(7^{2025}\) is divided by 100.
 
 **Solution:**
-Since \(7^4 = 2401 \equiv 1 \ (\bmod\ 100)\), the powers of \(7\) repeat every 20 in mod 100 because \(7^{20} = (7^4)^5 \equiv 1\). We can write \(2025 = 20 \times 101 + 5\), so \(7^{2025} \equiv 7^5 \ (\bmod\ 100)\). Computing \(7^5 = 16807\), the last two digits are 07, so the remainder is **7**.
+We note that \(7^4 = 2401 \equiv 1 \pmod{100}\), so powers of 7 repeat every
+four in this modulus.  Since \(2025 = 4\cdot 506 + 1\),
+\(7^{2025} \equiv 7^1 \equiv 7 \pmod{100}\).
+
+**Why this works:** When \(7^4 \equiv 1\) the multiplicative order of 7 modulo
+100 divides 4, letting us reduce any exponent modulo 4.  Reducing the exponent
+keeps calculations manageable while preserving the remainder.
