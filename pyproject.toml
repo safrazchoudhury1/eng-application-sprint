@@ -1,0 +1,21 @@
+[tool.black]
+line-length = 88
+
+[tool.ruff]
+line-length = 88
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+exclude = ["^coding/"]
+
+[tool.pytest.ini_options]
+addopts = "-q --cov=project --cov-report=term-missing"
+
+[tool.coverage.run]
+omit = [
+    "project/retry_logger_async.py",
+    "project/retry_logger_concurrent.py",
+    "project/retry_logger_concurrent_v2.py",
+    "project/retry_logger_gui.py",
+]

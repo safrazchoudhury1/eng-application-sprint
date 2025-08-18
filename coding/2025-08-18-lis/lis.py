@@ -19,6 +19,7 @@ def length_of_lis(nums):
 
 if __name__ == "__main__":
     import sys
+
     # Read integers from standard input
     data = [int(x) for x in sys.stdin.read().split()]
     print(length_of_lis(data))
